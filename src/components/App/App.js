@@ -35,10 +35,11 @@ class App extends Component {
   }
 
   deleteOrder = (id) => {
-    console.log(id)
     const filterOrders = this.state.orders.filter(order => order.id !== id)
 
-    this.setState({ orders: filterOrders })
+    fetch(`http://localhost:3001/api/v1/orders/${id}`, {
+      method: 'DELETE'
+    }).then(() => this.setState({ orders: filterOrders }))
   }
   
   render() {
