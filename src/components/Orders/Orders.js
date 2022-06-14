@@ -1,7 +1,8 @@
 import React from 'react';
 import './Orders.css';
 
-const Orders = props => {
+const Orders = (props) => {
+  console.log(props.orders)
   const orderEls = props.orders.map(order => {
     return (
       <div className="order">
