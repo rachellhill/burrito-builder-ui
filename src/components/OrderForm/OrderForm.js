@@ -43,18 +43,19 @@ class OrderForm extends Component {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient} onClick={event => this.handleIngredientChange(event)}>
+        <button className={ingredient} key={ingredient} name={ingredient} onClick={event => this.handleIngredientChange(event)}>
           {ingredient}
         </button>
       )
     });
 
     return (
-      <form>
+      <form className="controlled-form">
         <input
           type='text'
           placeholder='Name'
           name='name'
+          className="input-name"
           value={this.state.name}
           onChange={e => this.handleNameChange(e)}
         />
@@ -62,10 +63,9 @@ class OrderForm extends Component {
         { ingredientButtons }
 
         <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
-        {(!this.state.name && this.state.ingredients.length === 0) ? <p className='error'>Please fill out your name and select ingredients to place an order</p> : <button onClick={e => this.handleSubmit(e)}>
+        {(!this.state.name || this.state.ingredients.length === 0) ? <p className='error'>Please fill out your name and select ingredients to place an order</p> : <button className="submit-order" onClick={e => this.handleSubmit(e)}>
           Submit Order
         </button>}
-        
       </form>
     )
   }
