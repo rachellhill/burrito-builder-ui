@@ -12,6 +12,7 @@ const Orders = (props) => {
             return <li key={`${ingredient}${Date.now()}`}>{ingredient}</li>
           })}
         </ul>
+        <button onClick={() => props.deleteOrder(order.id)}>🗑</button>
       </div>
     )
   });

@@ -1,6 +1,6 @@
 describe('empty spec', () => {
   beforeEach(() => {
-    cy.intercept('GET', 'http://localhost:3001/api/v1/orders', { fixture: "orders.json"})
+    cy.intercept('GET', 'http://localhost:3001/api/v1/orders', { fixture: "orders.json" })
     cy.visit('http://localhost:3000/')
   })
   
@@ -21,7 +21,7 @@ describe('empty spec', () => {
     cy.get('.beans').click()
     cy.get('.steak').click()
     cy.get('.carnitas').click()
-    cy.intercept('POST', 'http://localhost:3001/api/v1/orders', { fixture: "post.json"})
+    cy.intercept('POST', 'http://localhost:3001/api/v1/orders', { fixture: "post.json" })
     cy.get('.submit-order').click()
     cy.get('.order').last().contains('Rachel')
     cy.get('.order').last().contains('beans')
