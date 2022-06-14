@@ -16,7 +16,7 @@ describe('empty spec', () => {
     cy.get('.ingredient-list').contains('jalapeno')
   })
 
-  it.only('Should be able to fill out form and see order added', () => {
+  it('Should be able to fill out form and see order added', () => {
     cy.get('.input-name').type('Rachel')
     cy.get('.beans').click()
     cy.get('.steak').click()
