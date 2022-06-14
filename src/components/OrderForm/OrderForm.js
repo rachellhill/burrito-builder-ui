@@ -13,6 +13,16 @@ class OrderForm extends Component {
 
   handleSubmit = e => {
     e.preventDefault();
+    const newOrder = {
+      id: Date.now(),
+      ...this.state
+    }
+
+    if (newOrder.name || newOrder.ingredients.length !== 0) {
+      this.props.addOrder(newOrder)
+    } else {
+      return 
+    }
     this.clearInputs();
   }
 
@@ -20,11 +30,20 @@ class OrderForm extends Component {
     this.setState({name: '', ingredients: []});
   }
 
+  handleIngredientChange = event => {
+    event.preventDefault();
+    this.setState({ ingredients: [...this.state.ingredients, event.target.name] })
+  }
+
+  handleNameChange = event => {
+    this.setState({ [event.target.name]: event.target.value})
+  }
+
   render() {
     const possibleIngredients = ['beans', 'steak', 'carnitas', 'sofritas', 'lettuce', 'queso fresco', 'pico de gallo', 'hot sauce', 'guacamole', 'jalapenos', 'cilantro', 'sour cream'];
     const ingredientButtons = possibleIngredients.map(ingredient => {
       return (
-        <button key={ingredient} name={ingredient} onClick={e => this.handleIngredientChange(e)}>
+        <button key={ingredient} name={ingredient} onClick={event => this.handleIngredientChange(event)}>
           {ingredient}
         </button>
       )
@@ -43,10 +62,10 @@ class OrderForm extends Component {
         { ingredientButtons }
 
         <p>Order: { this.state.ingredients.join(', ') || 'Nothing selected' }</p>
-
-        <button onClick={e => this.handleSubmit(e)}>
+        {(!this.state.name && this.state.ingredients.length === 0) ? <p className='error'>Please fill out your name and select ingredients to place an order</p> : <button onClick={e => this.handleSubmit(e)}>
           Submit Order
-        </button>
+        </button>}
+        
       </form>
     )
   }
